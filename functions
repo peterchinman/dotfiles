@@ -43,5 +43,5 @@ gwclose() {
     return 1
   fi
 
-  cd "$main" && git worktree remove --force "$current" && rm -rf "$current"
+  cd "$main" && git worktree remove "$current" && rm -rf "$current"
 }
