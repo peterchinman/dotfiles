@@ -16,10 +16,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 autoload -Uz compinit && compinit
 zstyle ':completion:*:*:git:*' matcher-list 'm:{a-z}={A-Z}'
 
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
 # Load aliases
 if [ -f ~/.aliases ]; then
     source ~/.aliases
