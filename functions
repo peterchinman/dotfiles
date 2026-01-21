@@ -32,3 +32,16 @@ gws() {
   local worktree=$(git worktree list | fzf --height=10 | awk '{print $1}')
   [ -n "$worktree" ] && cd "$worktree"
 }
+
+# Git worktree close: remove current worktree and cd to main
+gwclose() {
+  local current=$(git rev-parse --show-toplevel 2>/dev/null)
+  local main=$(git worktree list | head -1 | awk '{print $1}')
+
+  if [ "$current" = "$main" ]; then
+    echo "Can't close main worktree"
+    return 1
+  fi
+
+  cd "$main" && git worktree remove "$current"
+}
