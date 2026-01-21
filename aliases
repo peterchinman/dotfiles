@@ -1,0 +1,5 @@
+# Git monitoring
+alias mgbranch="watch --color -t  -n 1 'git branch'"
+alias mgstat="watch --color -t  -n 1 'git status'"
+alias gclose='current_branch=$(git branch --show-current) && git switch main && git branch -d $current_branch && git pull'
+alias gopen='git checkout -b "$(pbpaste)"'

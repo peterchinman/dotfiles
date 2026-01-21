@@ -1,0 +1,26 @@
+# Git worktree add with sibling directory convention: repo--branch
+gwt() {
+  if [ -z "$1" ]; then
+    echo "Usage: gwt <branch> [start-point]"
+    echo "       gwt -b <new-branch> [start-point]"
+    return 1
+  fi
+
+  local root=$(git rev-parse --show-toplevel 2>/dev/null)
+  if [ -z "$root" ]; then
+    echo "Not in a git repository"
+    return 1
+  fi
+
+  local repo=$(basename "$root")
+  local parent=$(dirname "$root")
+
+  if [ "$1" = "-b" ]; then
+    local branch="$2"
+    local start_point="${3:-HEAD}"
+    git worktree add -b "$branch" "$parent/$repo--$branch" "$start_point"
+  else
+    local branch="$1"
+    git worktree add "$parent/$repo--$branch" "$branch"
+  fi
+}
