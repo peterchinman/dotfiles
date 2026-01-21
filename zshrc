@@ -1,14 +1,14 @@
 export PATH="$HOME/.local/bin:$PATH"
 
 # fnm
-FNM_PATH="/Users/peterchinman/Library/Application Support/fnm"
+FNM_PATH="$HOME/Library/Application Support/fnm"
 if [ -d "$FNM_PATH" ]; then
-  export PATH="/Users/peterchinman/Library/Application Support/fnm:$PATH"
+  export PATH="$HOME/Library/Application Support/fnm:$PATH"
   eval "`fnm env`"
 fi
 
 # bun completions
-[ -s "/Users/peterchinman/.bun/_bun" ] && source "/Users/peterchinman/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -26,7 +26,7 @@ if [ -f ~/.functions ]; then
     source ~/.functions
 fi
 
-[ -f "/Users/peterchinman/.ghcup/env" ] && . "/Users/peterchinman/.ghcup/env" # ghcup-env
+[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
 
 . "$HOME/.atuin/bin/env"
 . "$HOME/.config/z.sh"
