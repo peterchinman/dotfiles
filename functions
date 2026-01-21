@@ -26,3 +26,9 @@ gwt() {
     git worktree add -b "$branch" "$path" "$start_point" && cd "$path"
   fi
 }
+
+# Git worktree switch with fzf
+gws() {
+  local worktree=$(git worktree list | fzf --height=10 | awk '{print $1}')
+  [ -n "$worktree" ] && cd "$worktree"
+}
