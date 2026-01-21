@@ -1,0 +1,20 @@
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[user]
+	name = Peter Chinman
+	email = peter.chinman@gmail.com
+	signingkey = C68F317FDA8AC07E
+[merge "mergiraf"]
+	name = mergiraf
+	driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
+[core]
+	attributesfile = ~/.gitattributes
+[alias]
+	pushup = push -u origin HEAD
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
