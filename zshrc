@@ -13,6 +13,8 @@ fi
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Auto-completions
 autoload -Uz compinit && compinit
 zstyle ':completion:*:*:git:*' matcher-list 'm:{a-z}={A-Z}'
 
@@ -34,3 +36,6 @@ fi
 eval "$(atuin init zsh)"
 eval "$(starship init zsh)"
 export GPG_TTY=$(tty)
+
+# Zoxide (needs to be after compinit)
+eval "$(zoxide init zsh)"
