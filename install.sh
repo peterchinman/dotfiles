@@ -31,6 +31,8 @@ link "aliases" ".aliases"
 link "functions" ".functions"
 link "gitconfig" ".gitconfig"
 link "gitattributes" ".gitattributes"
+mkdir -p "$HOME/.config"
+link "starship.toml" ".config/starship.toml"
 
 echo ""
 echo "Done! Config files linked."
