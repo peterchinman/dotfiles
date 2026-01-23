@@ -45,6 +45,8 @@ command -v starship >/dev/null 2>&1 || missing+=("starship")
 command -v atuin >/dev/null 2>&1 || missing+=("atuin")
 command -v bun >/dev/null 2>&1 || missing+=("bun")
 command -v fzf >/dev/null 2>&1 || missing+=("fzf")
+command -v zoxide >/dev/null 2>&1 || missing+=("zoxide")
+command -v nnn >/dev/null 2>&1 || missing+=("nnn")
 
 if [ ${#missing[@]} -eq 0 ]; then
   echo "  All dependencies installed!"
@@ -59,6 +61,8 @@ else
       atuin)    echo "  brew install atuin" ;;
       bun)      echo "  curl -fsSL https://bun.sh/install | bash" ;;
       fzf)      echo "  brew install fzf" ;;
+      zoxide)   echo "  brew install zoxide" ;;
+      nnn)      echo "  brew install nnn" ;;
     esac
   done
 fi
