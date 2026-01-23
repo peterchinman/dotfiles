@@ -17,13 +17,13 @@ gwt() {
 
   if [ "$1" = "-e" ]; then
     local branch="$2"
-    local path="$parent/$repo--$branch"
-    git worktree add "$path" "$branch" && cd "$path"
+    local wt_path="$parent/$repo--$branch"
+    git worktree add "$wt_path" "$branch" && cd "$wt_path"
   else
     local branch="$1"
     local start_point="${2:-HEAD}"
-    local path="$parent/$repo--$branch"
-    git worktree add -b "$branch" "$path" "$start_point" && cd "$path"
+    local wt_path="$parent/$repo--$branch"
+    git worktree add -b "$branch" "$wt_path" "$start_point" && cd "$wt_path"
   fi
 }
 
