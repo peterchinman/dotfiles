@@ -28,3 +28,44 @@ n ()
         rm -f -- "$NNN_TMPFILE" > /dev/null
     }
 }
+
+# Git worktree helpers
+wt-add() {
+  local name="$1"
+  local main_repo sibling_parent
+
+  main_repo=$(git worktree list --porcelain | awk '/^worktree /{print $2; exit}')
+  sibling_parent=$(dirname "$main_repo")
+
+  git worktree add "$sibling_parent/$name" -b "peter/$name"
+}
+
+wt-rm() {
+  local worktree_path branch main_repo
+
+  worktree_path=$(git rev-parse --show-toplevel)
+  branch=$(git branch --show-current)
+  main_repo=$(git worktree list --porcelain | awk '/^worktree /{print $2; exit}')
+
+  if [[ "$worktree_path" == "$main_repo" ]]; then
+    echo "Already in main repo, nothing to remove"
+    return 1
+  fi
+
+  # check for uncommitted changes
+  if [[ -n $(git status --porcelain) ]]; then
+    echo "Uncommitted changes in $worktree_path, aborting"
+    return 1
+  fi
+
+  # check for unpushed commits (silently passes if no upstream set)
+  if git log @{u}..HEAD 2>/dev/null | grep -q .; then
+    echo "Unpushed commits on $branch, aborting"
+    return 1
+  fi
+
+  cd "$main_repo" || return 1
+  rm -rf "$worktree_path"
+  git worktree prune
+  git branch -d "$branch"
+}
