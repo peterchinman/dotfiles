@@ -32,12 +32,19 @@ n ()
 # Git worktree helpers
 wt-add() {
   local name="$1"
-  local main_repo sibling_parent
+  local branch_name dir_name main_repo sibling_parent
+
+  dir_name="${name//\//-}"
+  if [[ "$name" == peter/* ]]; then
+    branch_name="$name"
+  else
+    branch_name="peter/$name"
+  fi
 
   main_repo=$(git worktree list --porcelain | awk '/^worktree /{print $2; exit}')
   sibling_parent=$(dirname "$main_repo")
 
-  git worktree add "$sibling_parent/$name" -b "peter/$name"
+  git worktree add "$sibling_parent/$dir_name" -b "$branch_name"
 }
 
 wt-rm() {
